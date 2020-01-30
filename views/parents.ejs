@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <head>
+            <a href="/sendEmail">send</a>
+            <a href="/">home</a>
+        </head>
+        <main>
+            <form action="/addstudent" method="POST">
+                <label>Student Name</label>
+                <input type="text" name="studentName">
+                <label>Parent Name</label>
+                <input type="text" name="parentName">
+                <label>Parent Email</label>
+                <input type="email" name="parentEmail">
+                <label>Parent Passcode</label>
+                <input type="password" name="parentPassword">
+                <input type="submit" value="ADD">
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Average Total Score</th>
+                        <th>Total Absence</th>
+                        <th>Parent Name</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% data.forEach(student => { %>
+                        <tr>
+                            <td><%= student.StudentName %></td>
+                            <td><%= student.totalScore %></td>
+                            <td><%= student.totalAbsen %></td>
+                            <td><%= student.Parent.name %></td>
+                            <td><a href="/editstudent/<%= student.id %>/edit">Edit</a>
+                                <a href="/destroystudent/<%= student.id %>/delete">Delete</a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </main>
+    </body>
+</html>

@@ -1,15 +1,16 @@
 const router = require('express').Router()
 const StudentController = require('../controllers/studentController.js')
+const ParentController = require('../controllers/parentController.js')
 
 router.get('/', StudentController.findStudents)
 
-router.post('/student', StudentController.addStudent)
+router.get('/parentdata', ParentController.findStudents)
 
-router.get('/student/:id/edit', StudentController.renderEditStudent)
-router.post('/student/:id/edit', StudentController.editStudent)
+router.post('/addstudent', ParentController.addStudent)
 
-router.get('/student/:id/delete', StudentController.destroyStudent)
+router.get('/editstudent/:id/edit', ParentController.renderEditStudent)
+router.post('/editstudent/:id/edit', ParentController.editStudent)
 
-router.get('/sendEmail', StudentController.sendEmail)
+router.get('/destroystudent/:id/delete', ParentController.destroyStudent)
 
 module.exports = router
