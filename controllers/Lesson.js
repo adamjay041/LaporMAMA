@@ -14,9 +14,6 @@ class Controller  {
     static renderAdd(req,res){
         res.render('formAdd.ejs' , {err :''})
     }
-    static renderUpdate(req,res){
-        res.render('formUpdate' ,{id : req.params.id})
-    }
     static addLesson (req,res) {
         let data  = {NameLesson : req.body.name}
         Lesson.create(data)
@@ -28,16 +25,7 @@ class Controller  {
             })
         
     }
-    static update(req,res) { 
-        let data  = {NameLesson : req.body.name}
-        Lesson.update(data,{where : {id :req.params.id}})
-            .then(data1 => {
-                res.redirect('/lesson')
-            })
-            .catch(err => {
-                res.send(err)
-            })
-    }
+
     static delete (req,res) { 
         Lesson.destroy({where : {id : req.params.id}})
             .then(data => {

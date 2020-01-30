@@ -1,19 +1,20 @@
-const { Student, Parent } = require('../models')
+const { Student, Parent, Conjunction } = require('../models')
 const nodemailer = require('nodemailer')
 const { Op } = require('sequelize')
 
 class ParentController{
-    static findStudents(req, res) {
+    static renderListAdmission(req, res) {
         Student.findAll({
             include: [Parent]
         })
         .then((data) => {
-            res.render('parents.ejs', { data, err: req.query.q })
+            res.render('admission.ejs', { data, err: req.query.q })
         })
         .catch((err) => {res.send(err)})
     }
 
     static addStudent(req, res) {
+        let studentId = ''
         Parent.create({
             name: req.body.parentName,
             email: req.body.parentEmail,
@@ -38,6 +39,7 @@ class ParentController{
             })
         })
         .then((data) => {
+            studentId = data.id
             return Parent.update({
                 studentId: data.id
             }, {
@@ -48,10 +50,15 @@ class ParentController{
                 }
             })
         })
-        .then(() => res.redirect('/parentdata'))
+        .then(() => {
+            return Conjunction.create({
+                StudentId: studentId
+            })
+        })
+        .then(() => res.redirect('/admission'))
         .catch((err) => {
             let error = err.errors[0].message
-            res.redirect(`/parentdata?q=${error}`)
+            res.redirect(`/admission?q=${error}`)
         })
     }
 
@@ -63,6 +70,7 @@ class ParentController{
             }
         })
         .then((data) => {
+            // res.send(data)
             res.render('editpage.ejs', { data })
         })
         .catch((err) => res.send(err))
@@ -89,10 +97,10 @@ class ParentController{
                 individualHooks: true
             })
         })
-        .then(() => res.redirect('/parentdata'))
+        .then(() => res.redirect('/admission'))
         .catch(() => {
             let message = `email sama seperti sebelumnya`
-            res.redirect(`/parentdata?q=${message}`)
+            res.redirect(`/admission?q=${message}`)
         })
     }
 
@@ -109,7 +117,7 @@ class ParentController{
                 }
             })
         })
-        .then(() => res.redirect('/parentdata'))
+        .then(() => res.redirect('/admission'))
         .catch((err) => res.send(err))
     }
 

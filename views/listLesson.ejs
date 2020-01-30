@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
+    <a href="/">home</a>
     <a href="/addLesson">add</a>
     <table border="1px">
         <tr>
@@ -16,7 +17,7 @@
         <%data.forEach(el => {%>
             <tr>
                 <td><%=el.NameLesson%></td>
-                <td><a href="<%=el.id%>/update">Update</a> | <a href="<%=el.id%>/delete">delete</a></td>
+                <td><a href="<%=el.id%>/delete">delete</a></td>
             </tr>
         <%})%>
     </table>
