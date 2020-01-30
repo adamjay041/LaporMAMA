@@ -8,17 +8,25 @@ class ParentController{
             include: [Parent]
         })
         .then((data) => {
-            res.render('parents.ejs', { data })
+            res.render('parents.ejs', { data, err: req.query.q })
         })
-        .catch((err) => {
-            res.send(err)})
+        .catch((err) => {res.send(err)})
     }
 
     static addStudent(req, res) {
-        Student.create({
-            StudentName: req.body.studentName
+        Parent.create({
+            name: req.body.parentName,
+            email: req.body.parentEmail,
+            password: req.body.parentPassword,
         }, {
             individualHooks: true
+        })
+        .then(() => {
+            return Student.create({
+                StudentName: req.body.studentName
+            }, {
+                individualHooks: true
+            })
         })
         .then(() => {
             return Student.findOne({
@@ -30,15 +38,21 @@ class ParentController{
             })
         })
         .then((data) => {
-            return Parent.create({
-                name: req.body.parentName,
-                email: req.body.parentEmail,
-                password: req.body.parentPassword,
+            return Parent.update({
                 studentId: data.id
+            }, {
+                where: {
+                    name: {
+                        [Op.iLike]: req.body.parentName
+                    }
+                }
             })
         })
         .then(() => res.redirect('/parentdata'))
-        .catch((err) => res.send(err))
+        .catch((err) => {
+            let error = err.errors[0].message
+            res.redirect(`/parentdata?q=${error}`)
+        })
     }
 
     static renderEditStudent(req, res) {
@@ -55,28 +69,31 @@ class ParentController{
     }
 
     static editStudent(req, res) {
-        Student.update({
-            StudentName: req.body.StudentName
+        Parent.update({
+            name: req.body.parentName,
+            email: req.body.parentEmail,
+            password: req.body.parentPassword
         }, {
             where: {
-                id: req.params.id
+                studentId: req.params.id
             },
             individualHooks: true
         })
         .then(() => {
-            return Parent.update({
-                name: req.body.parentName,
-                email: req.body.parentEmail,
-                password: req.body.parentPassword
+            return Student.update({
+                StudentName: req.body.StudentName
             }, {
                 where: {
-                    studentId: req.params.id
-                }
+                    id: req.params.id
+                },
+                individualHooks: true
             })
         })
         .then(() => res.redirect('/parentdata'))
-        .catch((err) => {
-            res.send(err)})
+        .catch(() => {
+            let message = `email sama seperti sebelumnya`
+            res.redirect(`/parentdata?q=${message}`)
+        })
     }
 
     static destroyStudent(req, res) {

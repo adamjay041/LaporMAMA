@@ -8,15 +8,16 @@
             <a href="/">home</a>
         </head>
         <main>
+            <span>Validation: <%= err %></span>
             <form action="/addstudent" method="POST">
                 <label>Student Name</label>
-                <input type="text" name="studentName">
+                <input type="text" name="studentName" minlength="3" maxlength="20" required>
                 <label>Parent Name</label>
-                <input type="text" name="parentName">
+                <input type="text" name="parentName" minlength="3" maxlength="20" required>
                 <label>Parent Email</label>
-                <input type="email" name="parentEmail">
+                <input type="email" name="parentEmail" maxlength="30" required>
                 <label>Parent Passcode</label>
-                <input type="password" name="parentPassword">
+                <input type="password" name="parentPassword" minlength="8" maxlength="15" required>
                 <input type="submit" value="ADD">
             </form>
             <table>
