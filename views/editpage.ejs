@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <main>
+            <form action="/student/<%= data.id %>/edit" method="POST">
+                <label>Update Student</label>
+                <input type="text" name="StudentName" value="<%= data.StudentName %>">
+                <input type="submit" value="EDIT">
+            </form>
+        </main>
+    </body>
+</html>
