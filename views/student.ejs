@@ -4,21 +4,11 @@
     </head>
     <body>
         <head>
-            <a href="/sendEmail">send</a>
-            <a href="/parentdata">Parent Data</a>
+            <a href="/addScore">Add Score</a>
+            <a href="/admission">Admission</a>
+            <a href="/lesson">Add Lesson</a>
         </head>
         <main>
-            <form action="/student" method="POST">
-                <label>New Student</label>
-                <input type="text" name="StudentName">
-                <label >mapel</label>
-
-                    <%lesson.forEach(el => {%>
-                <input type="checkbox" name="lesson" value="<%=el.id%>"><%=el.NameLesson%><br>
-                    <%})%>
-
-                <input type="submit" value="ADD">
-            </form>
             <table>
                 <thead>
                     <tr>
@@ -35,7 +25,6 @@
                             <td><%= student.totalScore %></td>
                             <td><%= student.totalAbsen %></td>
                             <td><a href="/student/<%= student.id %>/edit">Edit</a>
-                                <a href="/student/<%= student.id %>/delete">Delete</a>
                             </td>
                         </tr>
                     <% }) %>

@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <head>
+            <a href="/">home</a>
+        </head>
+        <main>
+            <form action="/student/<%= data.id %>/edit" method="POST">
+                <label>mapel</label><br>
+                <%lesson.forEach(el => {%>
+                    <input type="checkbox" name="lesson" value="<%=el.id%>"><%=el.NameLesson%><br>
+                <%})%>
+                <input type="submit" value="ADD">
+            </form>
+        </main>
+    </body>
+</html>
