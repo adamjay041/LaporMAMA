@@ -5,19 +5,38 @@ class ScoreController {
         Student.findAll({include : [Lesson]})
             .then(data => {
                 res.render('addScore',{data})
-                // res.send(data)
             })
 
     }
     static addScore(req,res) {
         Conjunction.update({Nilai : req.body.nilai},{where : {
             LessonId : req.body.lesson,
-            StudentId : req.params.id
-        }})
+            StudentId : req.params.id,
+        }, individualHooks:true})
         .then(_=>{
-            res.redirect('/')
+            return Conjunction.findAll({
+                where: {
+                    StudentId: req.params.id
+                }
+            })
         })
+        .then((data) => {
+            let totalScore = 0
+            for(let key of data) {
+                totalScore+=key.Nilai
+            }
+            let avgNilai = totalScore/data.length
+            return Student.update({
+                totalScore: avgNilai
+            }, {
+                where: {
+                    id: req.params.id
+                }
+            })
+        })
+        .then(() => res.redirect('/'))
         .catch(err => {
+            console.log(err)
             res.send(err)
         })
     }

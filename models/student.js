@@ -6,8 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class Student extends Model{}
   Student.init({
     StudentName: DataTypes.STRING,
-    totalScore: DataTypes.INTEGER,
-    totalAbsen: DataTypes.INTEGER
+    totalScore: DataTypes.INTEGER
   }, {
     sequelize,
     hooks: {

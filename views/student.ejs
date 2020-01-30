@@ -9,13 +9,12 @@
             <a href="/lesson">Add Lesson</a>
         </head>
         <main>
-            <table>
+            <table width="100%">
                 <thead>
                     <tr>
                         <th>Student Name</th>
-                        <th>Average Total Score</th>
-                        <th>Total Absence</th>
-                        <th>ACTION</th>
+                        <th>Average Score</th>
+                        <th>Add Mapel</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,7 +22,6 @@
                         <tr>
                             <td><%= student.StudentName %></td>
                             <td><%= student.totalScore %></td>
-                            <td><%= student.totalAbsen %></td>
                             <td><a href="/student/<%= student.id %>/edit">Edit</a>
                             </td>
                         </tr>
