@@ -14,9 +14,6 @@ module.exports = {
       totalScore: {
         type: Sequelize.INTEGER
       },
-      totalAbsen: {
-        type: Sequelize.INTEGER
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
