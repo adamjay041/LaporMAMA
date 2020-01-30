@@ -1,10 +1,11 @@
-const { Lesson } = require('../models')
+const { Lesson , Student} = require('../models')
 
 class Controller  {
     static findall (req,res){
-        Lesson.findAll()
+        Lesson.findAll({include : [Student]})
             .then(data => {
                 res.render('listLesson',{data})
+                // res.send(data)
             })
             .catch(err => {
                 res.send(err)

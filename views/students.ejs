@@ -10,6 +10,12 @@
             <form action="/student" method="POST">
                 <label>New Student</label>
                 <input type="text" name="StudentName">
+                <label >mapel</label>
+
+                    <%lesson.forEach(el => {%>
+                <input type="checkbox" name="lesson" value="<%=el.id%>"><%=el.NameLesson%><br>
+                    <%})%>
+
                 <input type="submit" value="ADD">
             </form>
             <table>
