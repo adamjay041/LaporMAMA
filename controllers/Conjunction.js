@@ -1,33 +1,36 @@
 const {Conjunction, Lesson ,Student} = require('../models')
 
 class ScoreController {
-    static find(req,res) {
-        let filter;
-        Lesson.findAll({
-            include : [Student]
-        })
+    static renderAddScore (req,res) {
+        Student.findAll({include : [Lesson]})
             .then(data => {
-                // console.log(data[0].dataValues.Students)
-                res.render('AddScore',{data})
+                res.render('addScore',{data})
                 // res.send(data)
             })
+
     }
-    // static update(req,res) {
-    //     let lesson ;
-    //     Conjunction.findOne({where : {lesson : req.body.lesson}})
-    //     .then(data => {
-    //         lesson = data
-    //     })
-    // }
-    // static findOne (req,res){
-    //     Lesson.findOne({
-    //         include : [Student],
-    //         where: {id : req.body.NameLesson}
-    //     })
-    //     .then(data => {
-    //         res.redirect('/addScore')
-    //     })
-    // }
+    static addScore(req,res) {
+        Conjunction.update({Nilai : req.body.nilai},{where : {
+            LessonId : req.body.lesson,
+            StudentId : req.params.id
+        }})
+        .then(_=>{
+            res.redirect('/')
+        })
+        .catch(err => {
+            res.send(err)
+        })
+    }
+    static renderLesson(req,res){
+        Student.findOne({include : [Lesson]},
+            {where : {id : req.params.id}})
+            .then(data => {
+                res.render('formAddScore',{data})
+            })
+            .catch(err => {
+                res.send(err)
+            })
+    }
 }
 
 module.exports = ScoreController
