@@ -19,6 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     Student.belongsToMany(models.Lesson,
       {through : models.Conjunction })
+    Student.hasOne(models.Parent, { foreignKey: 'studentId' })
+
   };
   return Student;
 };

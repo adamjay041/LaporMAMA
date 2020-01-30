@@ -5,18 +5,19 @@
     <body>
         <head>
             <a href="/sendEmail">send</a>
-            <a href="/parentdata">Parent Data</a>
+            <a href="/">home</a>
         </head>
         <main>
-            <form action="/student" method="POST">
-                <label>New Student</label>
-                <input type="text" name="StudentName">
-                <label >mapel</label>
-
-                    <%lesson.forEach(el => {%>
-                <input type="checkbox" name="lesson" value="<%=el.id%>"><%=el.NameLesson%><br>
-                    <%})%>
-
+            <span>Validation: <%= err %></span>
+            <form action="/addstudent" method="POST">
+                <label>Student Name</label>
+                <input type="text" name="studentName" minlength="3" maxlength="20" required>
+                <label>Parent Name</label>
+                <input type="text" name="parentName" minlength="3" maxlength="20" required>
+                <label>Parent Email</label>
+                <input type="email" name="parentEmail" maxlength="30" required>
+                <label>Parent Passcode</label>
+                <input type="password" name="parentPassword" minlength="8" maxlength="15" required>
                 <input type="submit" value="ADD">
             </form>
             <table>
@@ -25,6 +26,7 @@
                         <th>Student Name</th>
                         <th>Average Total Score</th>
                         <th>Total Absence</th>
+                        <th>Parent Name</th>
                         <th>ACTION</th>
                     </tr>
                 </thead>
@@ -34,14 +36,14 @@
                             <td><%= student.StudentName %></td>
                             <td><%= student.totalScore %></td>
                             <td><%= student.totalAbsen %></td>
-                            <td><a href="/student/<%= student.id %>/edit">Edit</a>
-                                <a href="/student/<%= student.id %>/delete">Delete</a>
+                            <td><%= student.Parent.name %></td>
+                            <td><a href="/editstudent/<%= student.id %>/edit">Edit</a>
+                                <a href="/destroystudent/<%= student.id %>/delete">Delete</a>
                             </td>
                         </tr>
                     <% }) %>
                 </tbody>
             </table>
         </main>
-
     </body>
 </html>

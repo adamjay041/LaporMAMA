@@ -108,34 +108,10 @@ class StudentController{
             where: {
                 id: req.params.id
             }
-        })
-        .then(() => res.redirect('/'))
-        .catch((err) => res.send(err))
-    }
 
-    static sendEmail(req, res) {
-        var transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: 'andrumahardi77@gmail.com',
-                pass: 'N0v6991m4h412d1'
-            }
-        });
-        
-        var mailOptions = {
-            from: 'andrumahardi77@gmail.com',
-            to: 'andrumahardi77@gmail.com',
-            subject: 'Sending Email using Node.js',
-            text: 'success!'
-        };
-        
-        transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-                res.send(error);
-            } else {
-                res.send('Email sent: ' + info.response);
-            }
-        });
+        })
+        .catch((err) => {
+            res.send(err)})
     }
 }
 
