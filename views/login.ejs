@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <head>
+            <a href="/">Home</a>
+        </head>
+        <main>
+            <form action="/login" method="POST">
+                <label>username</label>
+                <input type="email" name="email" required><br>
+                <label>password</label>
+                <input type="password" name="password" required><br>
+                <select name="role">
+                    <option value="teacher">Teacher</option>
+                    <option value="parent">Parent</option>
+                </select><br>
+                <input type="submit" value="login">
+            </form>
+        </main>
+    </body>
+</html>
