@@ -8,6 +8,7 @@ app.use(session({
     secret: 'ApA AJA',
     resave: false,
     saveUninitialized: true,
+    cookie: {}
 }))
 
 app.use(express.urlencoded({extended : false}))
