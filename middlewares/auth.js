@@ -8,15 +8,29 @@ class Auth {
         }
     }
     static isTeacher (req,res,next){
+        // if(req.session.login){
+        //     if(req.session.role != 'teacher'){
+        //         res.redirect('/login')
+        //     }
+        // }else{
+        //     next()
+        // }
         if(req.session.role != 'teacher'){
             res.redirect('/login')
         }else{
             next()
         }
     }
-    static isParent (req,res,next){
-        if(req.session.role != 'parent'){
-            res.redirect('/loginlecture')
+    static isStudent (req,res,next){
+        // if(!req.session.login){
+        //     if(req.session.role != 'student'){
+        //         res.redirect('/login')
+        //     }
+        // }else{
+        //     next()
+        // }
+        if(req.session.role != 'student'){
+            res.redirect('/login')
         }else{
             next()
         }
