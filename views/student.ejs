@@ -4,21 +4,19 @@
     </head>
     <body>
         <head>
-            <a href="/sendEmail">send</a>
+            <a href="/addScore">Add Score</a>
+            <a href="/admission">Admission</a>
+            <a href="/lesson">Add Lesson</a>
+            <a href="/login">Login</a>
+            <a href="/logout">Logout</a>
         </head>
         <main>
-            <form action="/student" method="POST">
-                <label>New Student</label>
-                <input type="text" name="StudentName">
-                <input type="submit" value="ADD">
-            </form>
-            <table>
+            <table width="100%">
                 <thead>
                     <tr>
                         <th>Student Name</th>
-                        <th>Average Total Score</th>
-                        <th>Total Absence</th>
-                        <th>ACTION</th>
+                        <th>Average Score</th>
+                        <th>Add Mapel</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,14 +24,13 @@
                         <tr>
                             <td><%= student.StudentName %></td>
                             <td><%= student.totalScore %></td>
-                            <td><%= student.totalAbsen %></td>
                             <td><a href="/student/<%= student.id %>/edit">Edit</a>
-                                <a href="/student/<%= student.id %>/delete">Delete</a>
                             </td>
                         </tr>
                     <% }) %>
                 </tbody>
             </table>
         </main>
+
     </body>
 </html>

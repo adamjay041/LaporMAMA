@@ -5,6 +5,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Lesson.associate = function(models) {
     // associations can be defined here
+    Lesson.belongsToMany(models.Student,
+       {through : models.Conjunction })
   };
   return Lesson;
 };

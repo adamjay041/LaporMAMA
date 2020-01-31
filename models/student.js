@@ -6,8 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class Student extends Model{}
   Student.init({
     StudentName: DataTypes.STRING,
-    totalScore: DataTypes.INTEGER,
-    totalAbsen: DataTypes.INTEGER
+    totalScore: DataTypes.INTEGER
   }, {
     sequelize,
     hooks: {
@@ -17,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
   })
   Student.associate = function(models) {
     // associations can be defined here
+    Student.belongsToMany(models.Lesson,
+      {through : models.Conjunction })
+    Student.hasOne(models.Parent, { foreignKey: 'studentId' })
+
   };
   return Student;
 };

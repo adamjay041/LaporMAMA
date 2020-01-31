@@ -7,17 +7,17 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="/">home</a>
-    <a href="/addLesson">add</a>
-    <table border="1px">
+    <table>
         <tr>
-            <th>NameLesson</th>
-            <th>Action</th>
+            <th>id</th>
+            <th>StudentName</th>
+            <th>Add Score</th>
         </tr>
         <%data.forEach(el => {%>
             <tr>
-                <td><%=el.NameLesson%></td>
-                <td><a href="<%=el.id%>/delete">delete</a></td>
+                <td><%=el.id%></td>
+                <td><%=el.StudentName%> </td>
+                <td><a href="/addScore/<%=el.id%>">add Score</a></td>
             </tr>
         <%})%>
     </table>

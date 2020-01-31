@@ -1,10 +1,11 @@
-const { Lesson } = require('../models')
+const { Lesson , Student} = require('../models')
 
 class Controller  {
     static findall (req,res){
-        Lesson.findAll()
+        Lesson.findAll({include : [Student]})
             .then(data => {
                 res.render('listLesson',{data})
+                // res.send(data)
             })
             .catch(err => {
                 res.send(err)
@@ -12,9 +13,6 @@ class Controller  {
     }
     static renderAdd(req,res){
         res.render('formAdd.ejs' , {err :''})
-    }
-    static renderUpdate(req,res){
-        res.render('formUpdate' ,{id : req.params.id})
     }
     static addLesson (req,res) {
         let data  = {NameLesson : req.body.name}
@@ -27,16 +25,7 @@ class Controller  {
             })
         
     }
-    static update(req,res) { 
-        let data  = {NameLesson : req.body.name}
-        Lesson.update(data,{where : {id :req.params.id}})
-            .then(data1 => {
-                res.redirect('/lesson')
-            })
-            .catch(err => {
-                res.send(err)
-            })
-    }
+
     static delete (req,res) { 
         Lesson.destroy({where : {id : req.params.id}})
             .then(data => {

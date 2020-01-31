@@ -4,9 +4,15 @@
     </head>
     <body>
         <main>
-            <form action="/student/<%= data.id %>/edit" method="POST">
+            <form action="/editstudent/<%= data.id %>/edit" method="POST">
                 <label>Update Student</label>
-                <input type="text" name="StudentName" value="<%= data.StudentName %>">
+                <input type="text" name="StudentName" value="<%= data.StudentName %>" minlength="3" maxlength="20" required>
+                <label>Update Parent Name</label>
+                <input type="text" name="parentName" value="<%= data.Parent.name %>" minlength="3" maxlength="20" required>
+                <label>Update Parent Email</label>
+                <input type="email" name="parentEmail" value="<%= data.Parent.email %>" maxlength="30" required>
+                <label>Update Parent Passcode</label>
+                <input type="password" name="parentPassword" value="<%= data.Parent.password %>" minlength="8" maxlength="15" required>
                 <input type="submit" value="EDIT">
             </form>
         </main>
